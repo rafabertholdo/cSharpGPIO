@@ -8,14 +8,13 @@ namespace console
     {
         static void Main(string[] args)
         {
-
             var gpio18 = new GPIO("18", GPIODirection.output);
             var gpio17 = new GPIO("17", GPIODirection.input);
 
-            int hitCount =0;
-            int maxHitCount = Convert.ToInt32(Console.ReadLine());
+            int hitCount = 0;
 
-            Console.WriteLine("How many button presses: ");
+            Console.Write("How many button presses: ");
+            int maxHitCount = Convert.ToInt32(Console.ReadLine());
             if (gpio18.StreamGood && gpio17.StreamGood) {
                 bool oldButtonState = false;
                 while (hitCount < maxHitCount) {

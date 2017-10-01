@@ -17,8 +17,12 @@ namespace cSharpGPIO
         public GPIO(string number, GPIODirection direction) {
             this.Number = number;
             this.Direction = direction;
+            try {
+                UnexportGPIO();
+            } catch(Exception) {
 
-            UnexportGPIO();
+            }
+
             ExportGPIO();
 
             if (direction == GPIODirection.input) {
@@ -34,14 +38,14 @@ namespace cSharpGPIO
 
         public void SetValue(bool value) {
             if (StreamGood && Direction == GPIODirection.output) {
-                WriteFile("/sys/class/gpio/gpio{Number}/value", value ? "1" : "0");
+                WriteFile(string.Format("/sys/class/gpio/gpio{0}/value", Number), value ? "1" : "0");
             }
         }
 
         public bool GetValue() {
             if (StreamGood && Direction == GPIODirection.input) {
-                string value = ReadFile("/sys/class/gpio/gpio{Number}/value");
-                return value != "0";
+                string value = ReadFile(string.Format("/sys/class/gpio/gpio{0}/value", Number));
+                return value[0] != '0';
             } else {
                 return false;
             }
@@ -57,7 +61,7 @@ namespace cSharpGPIO
 
         private void SetDirection(string direction) {
             if (StreamGood) {
-                WriteFile("/sys/class/gpio/gpio{Number}/direction", direction);
+                WriteFile(string.Format("/sys/class/gpio/gpio{0}/direction", Number), direction);
             }
         }
 
@@ -70,19 +74,14 @@ namespace cSharpGPIO
         }
 
         private string ReadFile(string path) {
-            FileStream fileStream = new FileStream(path, FileMode.Open);
-            string line = "";
-            using (StreamReader reader = new StreamReader(fileStream))
-            {
-                line = reader.ReadLine();
-            }
-            fileStream.Close();
-            return line;
+            string result = File.ReadAllText(path);
+            StreamGood = true;
+            return result;
         }
+
         private void WriteFile(string path, string value) {
-            StreamWriter file = new StreamWriter(path);
-            file.WriteLine(value);
-            file.Close();
+            File.WriteAllText(path, value);
+            StreamGood = true;
         }
     }
 }
