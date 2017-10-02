@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace cSharpGPIO
+namespace CSharpGPIO.Library
 {
     public enum GPIODirection {
         input,
@@ -43,7 +43,7 @@ namespace cSharpGPIO
         }
 
         public bool GetValue() {
-            if (StreamGood && Direction == GPIODirection.input) {
+            if (StreamGood) {
                 string value = ReadFile(string.Format("/sys/class/gpio/gpio{0}/value", Number));
                 return value[0] != '0';
             } else {

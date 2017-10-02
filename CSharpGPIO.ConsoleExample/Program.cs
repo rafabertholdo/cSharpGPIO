@@ -1,8 +1,8 @@
 ﻿using System;
-using cSharpGPIO;
+using CSharpGPIO.Library;
 using System.Threading;
 
-namespace console
+namespace CSharpGPIO.ConsoleExample
 {
     class Program
     {

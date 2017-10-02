@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\classLibrary\cSharpGPIO.csproj" />
+    <ProjectReference Include="..\CSharpGPIO.Library\CSharpGPIO.Library.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
