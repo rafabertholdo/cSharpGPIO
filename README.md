@@ -3,21 +3,42 @@
 cSharpGPIO is as library for writing and reading the Raspberry Pi GPIO, writen in C# with .net core 2.0
 
 ### How to compile. ###
+* change to project directory
+
+```cd  CSharpGPIO.Console```
+
+or
+
+```cd  CSharpGPIO.Console```
+
 * restore packages
+
 ```dotnet restore```
 * build
+
 ```dotnet build```
 * publish
+
 ```dotnet publish -r linux-arm```
 
 ### generated files ###
-* cSharpGPIO/console/bin/Debug/netcoreapp2.0/linux-arm/publish/
+* cSharpGPIO/CSharpGPIO.Console/bin/Debug/netcoreapp2.0/linux-arm/publish/
+* cSharpGPIO/CSharpGPIO.WebApi/bin/Debug/netcoreapp2.0/linux-arm/publish/
 
 ### run ###
 
+#### console ####
+
 ```sh
-$ sudo ./console
+$ sudo ./CSharpGPIO.Console
 ```
+
+#### WebApi ####
+
+```sh
+$ sudo ./CSharpGPIO.WebApi
+```
+
 ### usage example ###
 
 ```c#
